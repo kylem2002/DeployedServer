@@ -1,23 +1,17 @@
 const http = require("http");
 const path = require("path");
 const fs = require("fs");
+const express = require('express')
+const app = express();
+const cors = require('cors')
+
+app.use(cors({
+    origin: "*",
+}))
+
 
 const server = http.createServer((req, res) => {
-    // Handle /api request separately
-    if (req.url === '/api') {
-        fs.readFile(path.join(__dirname, 'public', 'db.json'), 'utf-8', (err, content) => {
-            if (err) {
-                res.writeHead(500);
-                res.end(`Server Error: ${err.code}`);
-                return;
-            }
-            res.writeHead(200, { 'Content-Type': 'application/json' });
-            res.end(content, 'utf-8');
-        });
-        return; // return here so that the below code doesn't execute for /api
-    }
-
-    // For other requests
+    
     let filePath = path.join(__dirname, 'public', req.url === '/' ? 'index.html' : req.url);
 
     // Get the extension of the file
@@ -35,6 +29,16 @@ const server = http.createServer((req, res) => {
             contentType = 'application/json';
             break;
         // Add more cases for other file types if needed
+        case '.js':
+            contentType = 'text/javascript';
+            break;
+        case '.png':
+            contentType = 'image/png';
+            break;
+        case '.jpg':
+            contentType = 'image/jpg';
+            break;
+        // ... other file types
     }
 
     // Read file
