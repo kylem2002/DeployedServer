@@ -68,7 +68,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // API endpoint to serve data from db.json
 app.get('/api', (req, res) => {
-    fs.readFile(path.join(__dirname, 'db.json'), 'utf8', (err, data) => {
+    fs.readFile(path.join(__dirname, 'public', 'db.json'), 'utf8', (err, data) => {
         if (err) {
             res.status(500).send('Server Error');
         } else {
