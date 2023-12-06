@@ -70,12 +70,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/api', (req, res) => {
     fs.readFile(path.join(__dirname, 'public', 'db.json'), 'utf8', (err, data) => {
         if (err) {
-            res.status(500).send('Server Error');
+            res.status(500).send('Server Error: Unable to read db.json');
         } else {
-            res.json(JSON.parse(data));
+            // Format the JSON data with indentation for readability
+            const formattedData = JSON.stringify(JSON.parse(data), null, 4);
+            res.send(formattedData);
         }
     });
 });
+
 
 // All other GET requests not handled before will return your app
 app.get('*', (req, res) => {
