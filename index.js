@@ -60,15 +60,21 @@ server.listen(PORT, () => console.log(`Server running on port ${PORT}`)); */
 
 const express = require('express');
 const path = require('path');
+const fs = require('fs');
 const app = express();
 
 // Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Set up a route for your API
+// API endpoint to serve data from db.json
 app.get('/api', (req, res) => {
-    // Here, you can fetch data from an external API or send JSON data
-    res.json({ message: "This is your API endpoint" });
+    fs.readFile(path.join(__dirname, 'db.json'), 'utf8', (err, data) => {
+        if (err) {
+            res.status(500).send('Server Error');
+        } else {
+            res.json(JSON.parse(data));
+        }
+    });
 });
 
 // All other GET requests not handled before will return your app
