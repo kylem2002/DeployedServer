@@ -1,14 +1,6 @@
-const http = require("http");
+/*const http = require("http");
 const path = require("path");
 const fs = require("fs");
-const express = require('express')
-const app = express();
-const cors = require('cors')
-
-app.use(cors({
-    origin: "*",
-}))
-
 
 const server = http.createServer((req, res) => {
     
@@ -64,4 +56,25 @@ const server = http.createServer((req, res) => {
 });
 
 const PORT = process.env.PORT || 5500;
-server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+server.listen(PORT, () => console.log(`Server running on port ${PORT}`)); */
+
+const express = require('express');
+const path = require('path');
+const app = express();
+
+// Serve static files from the 'public' directory
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Set up a route for your API
+app.get('/api', (req, res) => {
+    // Here, you can fetch data from an external API or send JSON data
+    res.json({ message: "This is your API endpoint" });
+});
+
+// All other GET requests not handled before will return your app
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+const PORT = process.env.PORT || 5500;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
