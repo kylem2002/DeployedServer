@@ -3,6 +3,21 @@ const path = require("path");
 const fs = require("fs");
 
 const server = http.createServer((req, res) => {
+    // Handle /api request separately
+    if (req.url === '/api') {
+        fs.readFile(path.join(__dirname, 'public', 'db.json'), 'utf-8', (err, content) => {
+            if (err) {
+                res.writeHead(500);
+                res.end(`Server Error: ${err.code}`);
+                return;
+            }
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(content, 'utf-8');
+        });
+        return; // return here so that the below code doesn't execute for /api
+    }
+
+    // For other requests
     let filePath = path.join(__dirname, 'public', req.url === '/' ? 'index.html' : req.url);
 
     // Get the extension of the file
