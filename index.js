@@ -77,9 +77,8 @@ app.get('/api', (req, res) => {
         if (err) {
             res.status(500).send('Server Error: Unable to read db.json');
         } else {
-            // Format the JSON data with indentation for readability
-            const formattedData = JSON.stringify(JSON.parse(data), null, 4);
-            res.send(formattedData);
+            // Parse the data as JSON and send it
+            res.json(JSON.parse(data));
         }
     });
 });
