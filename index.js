@@ -75,5 +75,3 @@ const PORT= process.env.PORT || 5959;
 
 // port, callback
 server.listen(PORT,()=> console.log(`Great our server is running on port ${PORT} `));
-const PORTname = process.env.PORT || 5501;
-app.listen(PORTname, () => console.log(`Server running on port ${PORTname}`));
