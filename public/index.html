@@ -79,6 +79,110 @@
         <a href="#Instagram">Instagram</a>
         <a href="#Facebook">Facebook</a>
     </footer>
-
+<style>
+    body {
+        display: grid;
+        grid-template-rows: auto 1fr auto; /* Improved layout for header, main, and footer */
+        gap: 0;
+        margin: 0;
+        font-family: 'Arial', sans-serif;
+    }
+    header {
+        background-color: #8FD6E1; /* Example color for header */
+        padding: 5px;
+    }
+    
+    main {
+        background-color: #F3F3F3; /* Example color for main */
+        padding: 20px;
+        display: grid;
+        grid-template-rows: max-content;
+        grid-template-columns: auto;
+    }
+    
+    footer {
+        background-color: #5DA0A2;
+        text-align: center;
+        padding: 40px; 
+        font-size: large;
+    }
+    
+    nav {
+        text-align: center;
+        font-size: medium;
+        padding: 20px; 
+        word-spacing: 75px;
+    }
+    
+    h2 {
+        font-size: 17px;
+        text-decoration: underline;
+    }
+    
+    .imgGrid {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+    }
+    
+    .projImg img {
+        max-width: 100%;
+        height: auto;
+    }
+    
+    main > * {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    
+    #Projects {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+    
+    .project-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    * {
+        box-sizing: border-box;
+    }
+    
+    section {
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+    
+    .imgGrid img {
+        width: 100%;
+        height: auto;
+    }
+    
+    @media (max-width: 500px) { 
+        nav {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            word-spacing: normal;
+            padding: 0px;
+        }
+        #Projects {
+            grid-template-columns: 1fr;
+        }
+        footer {
+            padding: 20px;
+            word-spacing: normal;
+        }
+        h1, h2 {
+            font-size: 1.2em;
+        }
+    }
+    
+</style>
 </body>
 </html>
