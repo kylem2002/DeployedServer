@@ -36,19 +36,12 @@ const server = http.createServer((req, res) => {
             case '.jpg':
                 contentType = 'image/jpg';
                 break;
-            case '.jpeg':
-                contentType = 'image/jpeg';
-                break;
-            // other cases for different file types can be added here
         }
 
-        // Check if contentType is text/html but no .html file extension
         if (contentType == "text/html" && extname == "") filePath += ".html";
 
-        // Log the filePath
         console.log(filePath);
 
-        // Read File
         fs.readFile(filePath, (err, content) => {
             if (err) {
                 if (err.code == 'ENOENT') {
