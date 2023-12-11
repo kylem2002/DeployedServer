@@ -3,6 +3,10 @@ const path = require("path");
 const fs = require("fs");
 
 const server = http.createServer((req, res) => {
+
+    res.setHeader('Access-Control-Allow-Origin', '*'); // Allows access from any origin
+    res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET'); // Allows only OPTIONS and GET methods
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
     // Handle API request
     if (req.url === '/api') {
         fs.readFile(path.join(__dirname, 'public', 'db.json'), 'utf-8',
